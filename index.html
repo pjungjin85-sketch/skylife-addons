@@ -13,7 +13,9 @@ body{background:var(--bg2);color:var(--dark);font-family:'Noto Sans KR',sans-ser
 /* HEADER */
 header{background:var(--bg);border-top:3px solid var(--red);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:200;box-shadow:var(--shadow);}
 .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:56px;gap:12px;}
-.logo-badge{background:var(--red);color:#fff;font-weight:900;font-size:12px;padding:4px 10px;border-radius:4px;white-space:nowrap;}
+.logo-text{font-size:18px;font-weight:900;color:var(--black);letter-spacing:-.02em;white-space:nowrap;}
+.logo-text span{color:var(--red);}
+.header-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;}
 .header-title{font-size:15px;font-weight:700;color:var(--dark);}
 .header-count{font-size:12px;color:var(--light);margin-left:auto;white-space:nowrap;}
 
@@ -112,6 +114,8 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--light);bor
 
 /* MOBILE */
 @media(max-width:767px){
+  .logo-text{font-size:15px;flex-shrink:0;}
+  .header-badge{font-size:9px;padding:2px 7px;}
   .header-title{font-size:13px;}
   .controls-row{flex-wrap:wrap;}
   .search-wrap{max-width:100%;}
@@ -127,7 +131,8 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--light);bor
 
 <header>
   <div class="header-inner">
-    <span class="logo-badge">SKY Life</span>
+    <div class="logo-text">kt <span>skylife</span></div>
+    <span class="header-badge">MOBILE</span>
     <span class="header-title">모바일 부가서비스 안내</span>
     <span class="header-count" id="headerCount"></span>
   </div>
