@@ -89,8 +89,6 @@ main{max-width:1200px;margin:20px auto;padding:0 20px 60px;}
 .modal-price.paid-price{color:var(--red);}
 .modal-price.once-price{color:#d97706;}
 .modal-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-.modal-close{position:absolute;top:14px;right:16px;background:var(--bg2);border:none;border-radius:50%;width:30px;height:30px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:background .2s;}
-.modal-close:hover{background:var(--red-light);color:var(--red);}
 
 .modal-body{padding:20px;}
 .modal-section{margin-bottom:20px;}
@@ -178,14 +176,13 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--light);bor
 <footer>Created by 박정진 &nbsp;|&nbsp; 스카이라이프 모바일 부가서비스 안내</footer>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalBtn()">
   <div class="modal" id="modal">
     <div class="modal-top">
       <div class="modal-top-row">
         <div class="modal-title" id="modalTitle"></div>
       </div>
       <div class="modal-tags" id="modalTags"></div>
-      <button class="modal-close" onclick="closeModalBtn()">✕</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
@@ -986,9 +983,6 @@ function openModal(idx){
   document.body.style.overflow='hidden';
 }
 
-function closeModal(e){
-  if(e.target===document.getElementById('modalOverlay')) closeModalBtn();
-}
 function closeModalBtn(){
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow='';
