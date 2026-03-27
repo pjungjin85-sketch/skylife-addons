@@ -183,7 +183,6 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--light);bor
     <div class="modal-top">
       <div class="modal-top-row">
         <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-price" id="modalPrice"></div>
       </div>
       <div class="modal-tags" id="modalTags"></div>
       <button class="modal-close" onclick="closeModalBtn()">✕</button>
@@ -940,8 +939,6 @@ function openModal(idx){
   const tagType  = a.priceType==='무료'?'tag-free':a.priceType==='1회성'?'tag-once':'tag-paid';
 
   document.getElementById('modalTitle').textContent = a.name;
-  document.getElementById('modalPrice').className = `modal-price ${priceCls}`;
-  document.getElementById('modalPrice').textContent = a.price;
 
   // tags
   let tags = `<span class="tag tag-cat">${a.cat}</span>`;
