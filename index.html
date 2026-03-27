@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스카이라이프 모바일 부가서비스 안내</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E60012;--red2:#CC0010;--red-light:#FFF5F5;--red-border:#FFCCCC;--black:#1A1A1A;--dark:#333333;--mid:#666666;--light:#999999;--bg:#FFFFFF;--bg2:#F7F7F7;--bg3:#FAFAFA;--border:#E8E8E8;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-hover:0 8px 28px rgba(0,0,0,0.13);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg2);color:var(--dark);font-family:'Noto Sans KR',sans-serif;min-height:100vh;}
+
+/* HEADER */
+header{background:var(--bg);border-top:3px solid var(--red);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:200;box-shadow:var(--shadow);}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:56px;gap:12px;}
+.logo-badge{background:var(--red);color:#fff;font-weight:900;font-size:12px;padding:4px 10px;border-radius:4px;white-space:nowrap;}
+.header-title{font-size:15px;font-weight:700;color:var(--dark);}
+.header-count{font-size:12px;color:var(--light);margin-left:auto;white-space:nowrap;}
+
+/* CONTROLS */
+.controls-wrap{max-width:1200px;margin:0 auto;padding:20px 20px 0;}
+.controls-row1{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px;}
+.search-wrap{position:relative;flex:1;min-width:220px;max-width:360px;}
+.search-wrap input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px 9px 36px;color:var(--dark);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s;}
+.search-wrap input:focus{border-color:var(--red);}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--light);font-size:14px;}
+.reset-btn{padding:7px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--red-border);background:var(--red-light);color:var(--red);font-family:inherit;transition:all .2s;}
+.reset-btn:hover{background:rgba(230,0,18,.15);}
+
+.controls-row2{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px;}
+.row-label{font-size:11px;font-weight:700;color:var(--mid);letter-spacing:.04em;margin-right:2px;white-space:nowrap;}
+.filter-btn{padding:7px 14px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--mid);transition:all .2s;font-family:inherit;white-space:nowrap;}
+.filter-btn:hover{border-color:var(--red-border);color:var(--dark);}
+.filter-btn.active{background:var(--red);color:#fff;border-color:transparent;}
+
+/* STATS */
+.stats-bar{max-width:1200px;margin:12px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;}
+.stat-chip{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:12px;color:var(--mid);box-shadow:var(--shadow);}
+.stat-chip .num{font-weight:700;color:var(--red);}
+
+/* GRID */
+main{max-width:1200px;margin:20px auto;padding:0 20px 60px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+
+/* CARD */
+.card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px;}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);}
+.card.free::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10b981,#34d399);}
+.card.paid::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red2),var(--red));}
+.card.once::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#d97706,#fbbf24);}
+
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.card-name{font-size:14px;font-weight:700;color:var(--black);line-height:1.4;}
+.price-badge{font-size:13px;font-weight:700;white-space:nowrap;text-align:right;flex-shrink:0;}
+.price-badge.free-price{color:#059669;}
+.price-badge.paid-price{color:var(--red);}
+.price-badge.once-price{color:#d97706;}
+
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.02em;}
+.tag-cat{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
+.tag-free{background:rgba(16,185,129,.1);color:#059669;border:1px solid rgba(16,185,129,.2);}
+.tag-paid{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
+.tag-once{background:rgba(217,119,6,.1);color:#d97706;border:1px solid rgba(217,119,6,.2);}
+.tag-auto{background:rgba(99,102,241,.1);color:#6366f1;border:1px solid rgba(99,102,241,.2);}
+
+.card-desc{font-size:12px;color:var(--mid);line-height:1.6;}
+.card-note{font-size:11px;color:var(--light);line-height:1.5;margin-top:2px;}
+
+/* SECTION HEADER */
+.section-head{display:flex;align-items:center;gap:10px;margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+.section-title{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--red);}
+.section-count{font-size:11px;color:var(--mid);background:var(--bg2);padding:2px 8px;border-radius:10px;}
+
+/* EMPTY */
+.empty{text-align:center;padding:80px 20px;color:var(--mid);}
+.empty-icon{font-size:48px;margin-bottom:14px;}
+.empty-text{font-size:15px;font-weight:600;margin-bottom:6px;}
+.empty-sub{font-size:12px;}
+
+/* FOOTER */
+footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--light);border-top:1px solid var(--border);background:var(--bg);}
+
+/* MOBILE */
+@media(max-width:767px){
+  .header-title{font-size:13px;}
+  .controls-row1,.controls-row2{flex-direction:column;align-items:stretch;}
+  .search-wrap{max-width:100%;}
+  .controls-row2{flex-direction:row;flex-wrap:wrap;}
+  .grid{grid-template-columns:1fr;}
+  .stats-bar{gap:6px;}
+  .stat-chip{font-size:11px;padding:5px 10px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="logo-badge">SKY Life</span>
+    <span class="header-title">모바일 부가서비스 안내</span>
+    <span class="header-count" id="headerCount"></span>
+  </div>
+</header>
+
+<div class="controls-wrap">
+  <div class="controls-row1">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="서비스명, 설명 검색…" oninput="applyFilters()">
+    </div>
+    <button class="reset-btn" onclick="resetFilters()">필터 초기화</button>
+  </div>
+  <div class="controls-row2">
+    <span class="row-label">카테고리</span>
+    <button class="filter-btn active" data-cat="전체" onclick="setCat(this)">전체</button>
+    <button class="filter-btn" data-cat="통화편의" onclick="setCat(this)">통화편의</button>
+    <button class="filter-btn" data-cat="차단/보안" onclick="setCat(this)">차단·보안</button>
+    <button class="filter-btn" data-cat="데이터" onclick="setCat(this)">데이터</button>
+    <button class="filter-btn" data-cat="로밍" onclick="setCat(this)">로밍</button>
+    <button class="filter-btn" data-cat="OTT/음악" onclick="setCat(this)">OTT·음악</button>
+    <button class="filter-btn" data-cat="알림" onclick="setCat(this)">알림</button>
+    <button class="filter-btn" data-cat="번호" onclick="setCat(this)">번호</button>
+    <button class="filter-btn" data-cat="안전/위치" onclick="setCat(this)">안전·위치</button>
+  </div>
+  <div class="controls-row2">
+    <span class="row-label">요금</span>
+    <button class="filter-btn active" data-price="전체" onclick="setPrice(this)">전체</button>
+    <button class="filter-btn" data-price="무료" onclick="setPrice(this)">무료</button>
+    <button class="filter-btn" data-price="유료" onclick="setPrice(this)">유료 (월정액)</button>
+    <button class="filter-btn" data-price="1회성" onclick="setPrice(this)">1회성</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-chip">전체 <span class="num" id="statTotal">-</span>건</div>
+  <div class="stat-chip">무료 <span class="num" id="statFree">-</span></div>
+  <div class="stat-chip">월정액 유료 <span class="num" id="statPaid">-</span></div>
+  <div class="stat-chip">1회성 <span class="num" id="statOnce">-</span></div>
+</div>
+
+<main>
+  <div id="container"></div>
+</main>
+
+<footer>Created by 박정진 &nbsp;|&nbsp; 스카이라이프 모바일 부가서비스 안내</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════ */
+const ADDONS = [
+  /* ── 통화편의 ── */
+  {name:'발신번호표시', cat:'통화편의', priceType:'무료', price:'무료', auto:true,  desc:'전화 수신 시 발신자 전화번호를 자동으로 표시합니다.'},
+  {name:'통합사서함',   cat:'통화편의', priceType:'무료', price:'무료', auto:true,  desc:'전원 꺼짐 등 수신 불가 상태일 때 메시지 및 연락처를 보관합니다. (음성메시지 확인 시 통화료 별도)'},
+  {name:'음성사서함',   cat:'통화편의', priceType:'무료', price:'무료', auto:false, desc:'전원 꺼짐·부재 시 상대방이 남긴 음성메시지를 확인할 수 있습니다.'},
+  {name:'발신번호표시제한', cat:'통화편의', priceType:'무료', price:'무료', auto:false, desc:'전화 발신 시 내 번호가 수신자 화면에 표시되지 않도록 제한합니다.'},
+  {name:'통화중대기',   cat:'통화편의', priceType:'무료', price:'무료', auto:false, desc:'통화 중 다른 전화가 걸려와도 대기 후 수신할 수 있습니다.'},
+  {name:'통화가능알리미 거부', cat:'통화편의', priceType:'무료', price:'무료', auto:false, desc:'통화가능알리미 가입 발신자에게 내 통화 가능 상태가 통보되지 않도록 합니다.'},
+  {name:'캐치콜',       cat:'통화편의', priceType:'유료', price:'550원/월', auto:false, desc:'부재 중·통화 중에 걸려온 전화번호를 통화 가능 상태가 되면 SMS로 알려줍니다.'},
+  {name:'캐치콜플러스', cat:'통화편의', priceType:'유료', price:'880원/월', auto:false, desc:'캐치콜 + 통화가능알리미 패키지. 부재 알림 + 상대방 통화 가능 알림을 함께 제공합니다.'},
+  {name:'캐치콜×링투유(기본팩)', cat:'통화편의', priceType:'유료', price:'1,320원/월', auto:false, desc:'캐치콜과 링투유를 함께 이용하는 패키지 상품입니다.'},
+  {name:'착신전환통화', cat:'통화편의', priceType:'유료', price:'770원/월', auto:false, desc:'걸려온 음성 전화를 지정한 전화번호로 자동 연결합니다.'},
+  {name:'착신전환 자동연결', cat:'통화편의', priceType:'유료', price:'1,650원/월', auto:false, desc:'음성·영상·문자 포함 모든 착신을 지정 번호로 자동 전환합니다.'},
+  {name:'통화가능알리미', cat:'통화편의', priceType:'유료', price:'550원/월', auto:false, desc:'상대방이 통화 가능 상태가 되면 즉시 알림을 받을 수 있습니다.'},
+  {name:'통화요구알리미', cat:'통화편의', priceType:'유료', price:'550원/월', auto:false, desc:'상대방이 통화 가능 상태가 되었을 때 통화 요청 메시지를 자동 전송합니다.'},
+  {name:'링투유',       cat:'통화편의', priceType:'유료', price:'990원/월', auto:false, desc:'지정한 음원을 통화연결음(컬러링)으로 설정합니다.'},
+  {name:'링투유 오토체인지(월)', cat:'통화편의', priceType:'유료', price:'660원/월', auto:false, desc:'매월 자동으로 통화연결음을 변경해 주는 서비스입니다.'},
+  {name:'링투유 오토체인지(주)', cat:'통화편의', priceType:'유료', price:'550원/월', auto:false, desc:'매주 자동으로 통화연결음을 변경해 주는 서비스입니다.'},
+  {name:'오토링',       cat:'통화편의', priceType:'유료', price:'770원/월', auto:false, desc:'매월 새로운 통화연결음으로 자동 설정됩니다.'},
+  {name:'쇼미',         cat:'통화편의', priceType:'유료', price:'별도 문의', auto:false, desc:'전화 발신 시 내 메시지와 이미지가 상대방 화면에 표시됩니다.'},
+  {name:'프리미엄번호 번호안내서비스', cat:'통화편의', priceType:'유료', price:'3,300원/월', auto:false, desc:'이전 번호로 걸려오는 전화를 현재 번호로 연결해줍니다. (최초 6개월 무료)', note:'최초 6개월 무료'},
+
+  /* ── 차단/보안 ── */
+  {name:'정보제공사업자번호차단', cat:'차단/보안', priceType:'무료', price:'무료', auto:true,  desc:'스팸성 음성 및 문자를 자동으로 차단합니다.'},
+  {name:'스팸차단서비스',  cat:'차단/보안', priceType:'무료', price:'무료', auto:true,  desc:'고객이 설정한 문구·번호가 포함된 메시지를 차단합니다.'},
+  {name:'익명호수신거부',  cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'발신번호 표시를 제한한 발신자의 전화를 수신 거부합니다.'},
+  {name:'국제전화발신제한', cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'국제전화 발신을 차단하여 의도치 않은 고액 요금을 방지합니다.'},
+  {name:'국제전화 수신차단', cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'핸드폰으로 걸려오는 국제전화를 차단합니다.'},
+  {name:'불법TM 수신차단', cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'받기 싫은 TM(텔레마케팅) 번호를 최대 50개까지 차단합니다.'},
+  {name:'번호도용문자 차단', cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'타인이 내 번호를 발신번호로 설정해 발송하는 문자를 차단합니다.'},
+  {name:'060발신차단',    cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'060 정보이용료 과다요금 발생을 자동으로 차단합니다.'},
+  {name:'무선인터넷차단',  cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'무선인터넷 접속을 차단합니다.'},
+  {name:'네트워크유해차단', cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'유해 웹사이트 무선데이터 접속을 차단합니다.'},
+  {name:'정보보호알리미',  cat:'차단/보안', priceType:'무료', price:'무료', auto:false, desc:'해킹·웜 바이러스 등 보안 위험 발생 시 대처 방법을 문자로 알려줍니다.'},
+  {name:'휴대폰 번호보호서비스', cat:'차단/보안', priceType:'유료', price:'1,100원/월', auto:false, desc:'내 번호로 타인이 본인인증을 시도하는 것을 차단합니다.'},
+  {name:'특정번호수신차단', cat:'차단/보안', priceType:'유료', price:'2,200원/월', auto:false, desc:'음성·SMS 수신을 차단할 번호를 최대 10개 설정합니다.'},
+
+  /* ── 데이터 ── */
+  {name:'LTE 데이터충전 100MB', cat:'데이터', priceType:'1회성', price:'1,980원', auto:false, desc:'LTE 데이터 100MB를 즉시 충전합니다. (일할계산 미적용)', note:'1회성 충전'},
+  {name:'LTE 데이터충전 300MB', cat:'데이터', priceType:'1회성', price:'5,940원', auto:false, desc:'LTE 데이터 300MB를 즉시 충전합니다.', note:'1회성 충전'},
+  {name:'LTE 데이터충전 500MB', cat:'데이터', priceType:'1회성', price:'8,800원', auto:false, desc:'LTE 데이터 500MB를 즉시 충전합니다.', note:'1회성 충전'},
+  {name:'LTE 데이터충전 1GB',  cat:'데이터', priceType:'1회성', price:'14,300원', auto:false, desc:'LTE 데이터 1GB를 즉시 충전합니다.', note:'1회성 충전'},
+  {name:'LTE 데이터충전 2GB',  cat:'데이터', priceType:'1회성', price:'19,800원', auto:false, desc:'LTE 데이터 2GB를 즉시 충전합니다.', note:'1회성 충전'},
+  {name:'LTE 안심QoS 옵션 1Mbps', cat:'데이터', priceType:'유료', price:'3,300원/월', auto:false, desc:'기본 데이터 소진 후 1Mbps 속도로 무제한 이용합니다.'},
+  {name:'LTE 안심QoS 옵션 400Kbps', cat:'데이터', priceType:'유료', price:'5,500원/월', auto:false, desc:'기본 데이터 소진 후 400Kbps 속도로 무제한 이용합니다.'},
+  {name:'올레 Wi-Fi 싱글', cat:'데이터', priceType:'유료', price:'8,800원/월', auto:false, desc:'전국 olleh WiFi Zone에서 데이터를 무제한으로 이용합니다.'},
+  {name:'LTE 데이터 쉐어링', cat:'데이터', priceType:'무료', price:'무료', auto:false, desc:'LTE 스마트기기 간 데이터를 공유합니다. (올레 Wi-Fi 무료 포함, 연결 1대 기준)'},
+  {name:'원내비 데이터 무과금', cat:'데이터', priceType:'무료', price:'무료', auto:false, desc:'KT 내비게이션 앱 사용 시 데이터가 차감되지 않습니다.'},
+
+  /* ── 로밍 ── */
+  {name:'로밍 하루종일 ON', cat:'로밍', priceType:'유료', price:'11,000원/일', auto:false, desc:'185개국에서 기본 300MB + 소진 후 400Kbps 속도로 하루 종일 이용합니다.'},
+  {name:'로밍 하루종일 ON 플러스', cat:'로밍', priceType:'유료', price:'13,000원/일', auto:false, desc:'185개국에서 기본 500MB + 소진 후 1Mbps 속도로 하루 종일 이용합니다.'},
+  {name:'로밍 하루종일 ON 톡', cat:'로밍', priceType:'유료', price:'3,300원/일', auto:false, desc:'200Kbps 속도로 카카오톡 등 메신저를 하루 종일 이용합니다.'},
+  {name:'데이터로밍 12시간', cat:'로밍', priceType:'유료', price:'6,600원', auto:false, desc:'185개국에서 기본 100MB + 소진 후 400Kbps로 12시간 이용합니다.', note:'1회성'},
+  {name:'데이터 로밍 기가팩 (중·일)', cat:'로밍', priceType:'유료', price:'25,000원/5일', auto:false, desc:'중국·일본에서 2.5GB 데이터를 5일간 이용합니다.'},
+  {name:'중국/일본 알뜰 로밍', cat:'로밍', priceType:'유료', price:'25,000원/5일', auto:false, desc:'중국·일본에서 데이터 3GB + 음성통화 30분을 5일간 이용합니다.'},
+  {name:'함께 쓰는 로밍 4GB', cat:'로밍', priceType:'유료', price:'33,000원/15일', auto:false, desc:'122개국에서 친구 최대 4명과 총 4GB 데이터를 15일간 공유합니다.'},
+  {name:'음성로밍차단', cat:'로밍', priceType:'무료', price:'무료', auto:false, desc:'해외 로밍 중 음성·영상·문자 발신을 차단하여 의도치 않은 요금을 방지합니다.'},
+  {name:'데이터로밍차단', cat:'로밍', priceType:'무료', price:'무료', auto:false, desc:'해외 로밍 중 데이터 서비스를 차단합니다.'},
+  {name:'로밍안내방송', cat:'로밍', priceType:'무료', price:'무료', auto:false, desc:'로밍 중 전화를 거는 상대방에게 현재 로밍 중임을 안내합니다.'},
+  {name:'+국제전화 00345 발신', cat:'로밍', priceType:'무료', price:'무료', auto:false, desc:'국제전화 기본 접속번호를 00345로 변경합니다.'},
+
+  /* ── OTT/음악 ── */
+  {name:'지니팩 (알뜰폰)', cat:'OTT/음악', priceType:'유료', price:'3,300원/월', auto:false, desc:'지니뮤직 스트리밍 무제한 + 전용 데이터를 제공합니다.'},
+  {name:'유튜브 프리미엄', cat:'OTT/음악', priceType:'유료', price:'13,900원/월', auto:false, desc:'유튜브 광고 제거, 오프라인 저장, 유튜브 뮤직 프리미엄을 이용합니다.', note:'최초 3개월 무료 / 정상가 14,900원'},
+
+  /* ── 알림 ── */
+  {name:'모바일 이용요금내역 알리미', cat:'알림', priceType:'무료', price:'무료', auto:false, desc:'매월 납부 요금 내역을 문자로 알려줍니다.'},
+  {name:'요금납부알림 서비스', cat:'알림', priceType:'무료', price:'무료', auto:false, desc:'요금 납부가 완료되면 확인 문자를 발송합니다.'},
+  {name:'무료통화 잔여량 자동안내', cat:'알림', priceType:'무료', price:'무료', auto:false, desc:'당월 무료 제공 통화량 소진 80%·100% 기준으로 잔여량을 문자 알림합니다.'},
+  {name:'국제통화내역통보', cat:'알림', priceType:'무료', price:'무료', auto:false, desc:'국제전화 이용 시 발신 내역을 요금명세서와 함께 발송합니다.'},
+  {name:'링투유알리미', cat:'알림', priceType:'무료', price:'무료', auto:false, desc:'현재 설정된 링투유(컬러링) 내용을 월 2회 문자로 알려줍니다.'},
+
+  /* ── 번호 ── */
+  {name:'투넘버플러스', cat:'번호', priceType:'유료', price:'별도 문의', auto:false, desc:'투넘버 식별번호 010화 전환 + 발신 기능이 추가된 서비스입니다.'},
+  {name:'투폰서비스', cat:'번호', priceType:'유료', price:'별도 문의', auto:false, desc:'스마트폰 한 대를 두 대처럼 분리해서 사용합니다.'},
+  {name:'휴대폰결제이용거부', cat:'번호', priceType:'무료', price:'무료', auto:true, desc:'이동전화를 이용한 결제를 거부합니다. (동의 거부 시 자동 가입)'},
+
+  /* ── 안전/위치 ── */
+  {name:'119긴급구조위치제공', cat:'안전/위치', priceType:'무료', price:'무료', auto:false, desc:'119에 긴급구조 요청 시 위치정보를 제공합니다.'},
+  {name:'아이서치 서비스', cat:'안전/위치', priceType:'유료', price:'3,300원/월', auto:false, desc:'자녀·피보호자의 위치를 보호자에게 정기적으로 알려줍니다.'},
+  {name:'가족긴급보호서비스', cat:'안전/위치', priceType:'유료', price:'3,300원/월', auto:false, desc:'실시간 위치 조회, 안심·안전 기능 9가지를 제공하는 가족 보호 서비스입니다.'},
+];
+
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+let activeCat   = '전체';
+let activePrice = '전체';
+
+function setCat(btn){
+  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  applyFilters();
+}
+function setPrice(btn){
+  document.querySelectorAll('[data-price]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  activePrice = btn.dataset.price;
+  applyFilters();
+}
+function resetFilters(){
+  document.getElementById('searchInput').value='';
+  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-cat="전체"]').classList.add('active');
+  document.querySelectorAll('[data-price]').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-price="전체"]').classList.add('active');
+  activeCat='전체'; activePrice='전체';
+  applyFilters();
+}
+
+function applyFilters(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const filtered = ADDONS.filter(a=>{
+    const matchCat   = activeCat==='전체' || a.cat===activeCat;
+    const matchPrice = activePrice==='전체' || a.priceType===activePrice;
+    const matchQ     = !q || a.name.toLowerCase().includes(q) || (a.desc||'').toLowerCase().includes(q) || a.cat.toLowerCase().includes(q);
+    return matchCat && matchPrice && matchQ;
+  });
+  renderCards(filtered);
+  updateStats(filtered);
+}
+
+/* ═══════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════ */
+const CATS = ['통화편의','차단/보안','데이터','로밍','OTT/음악','알림','번호','안전/위치'];
+
+function renderCards(list){
+  const container = document.getElementById('container');
+  if(!list.length){
+    container.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">검색 결과가 없습니다</div><div class="empty-sub">다른 검색어나 필터를 시도해 보세요</div></div>`;
+    document.getElementById('headerCount').textContent='';
+    return;
+  }
+
+  // group by category
+  const groups = {};
+  CATS.forEach(c=>{groups[c]=[];});
+  list.forEach(a=>{ if(groups[a.cat]) groups[a.cat].push(a); });
+
+  let html='';
+  CATS.forEach(cat=>{
+    const items = groups[cat];
+    if(!items.length) return;
+    html += `<div class="section-head"><span class="section-title">${cat}</span><span class="section-count">${items.length}건</span></div>`;
+    html += '<div class="grid">';
+    items.forEach(a=>{
+      const cls = a.priceType==='무료'?'free':a.priceType==='1회성'?'once':'paid';
+      const priceCls = a.priceType==='무료'?'free-price':a.priceType==='1회성'?'once-price':'paid-price';
+      const tagType = a.priceType==='무료'?'tag-free':a.priceType==='1회성'?'tag-once':'tag-paid';
+      html+=`
+      <div class="card ${cls}">
+        <div class="card-head">
+          <div class="card-name">${a.name}</div>
+          <div class="price-badge ${priceCls}">${a.price}</div>
+        </div>
+        <div class="card-tags">
+          <span class="tag tag-cat">${a.cat}</span>
+          <span class="tag ${tagType}">${a.priceType==='무료'?'무료':a.priceType==='1회성'?'1회성':'월정액'}</span>
+          ${a.auto?'<span class="tag tag-auto">자동가입</span>':''}
+        </div>
+        <div class="card-desc">${a.desc}</div>
+        ${a.note?`<div class="card-note">※ ${a.note}</div>`:''}
+      </div>`;
+    });
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  document.getElementById('headerCount').textContent = `총 ${list.length}건`;
+}
+
+function updateStats(list){
+  document.getElementById('statTotal').textContent = list.length;
+  document.getElementById('statFree').textContent  = list.filter(a=>a.priceType==='무료').length+'건';
+  document.getElementById('statPaid').textContent  = list.filter(a=>a.priceType==='유료').length+'건';
+  document.getElementById('statOnce').textContent  = list.filter(a=>a.priceType==='1회성').length+'건';
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+applyFilters();
+</script>
+</body>
+</html>
