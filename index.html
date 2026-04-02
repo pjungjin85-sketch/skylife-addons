@@ -864,11 +864,12 @@ function resetFilters(){
 }
 
 function applyFilters(){
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const q = document.getElementById('searchInput').value.trim().toLowerCase().replace(/\s+/g,'');
   const filtered = ADDONS.filter(a=>{
+    const norm = s => s.toLowerCase().replace(/\s+/g,'');
     const matchCat   = activeCat==='전체' || a.cat===activeCat;
     const matchPrice = activePrice==='전체' || a.priceType===activePrice;
-    const matchQ     = !q || a.name.toLowerCase().includes(q) || (a.desc||'').toLowerCase().includes(q) || a.cat.toLowerCase().includes(q) || (a.features||[]).some(f=>f.toLowerCase().includes(q));
+    const matchQ     = !q || norm(a.name).includes(q) || norm(a.desc||'').includes(q) || norm(a.cat).includes(q) || (a.features||[]).some(f=>norm(f).includes(q));
     return matchCat && matchPrice && matchQ;
   });
   renderCards(filtered);
