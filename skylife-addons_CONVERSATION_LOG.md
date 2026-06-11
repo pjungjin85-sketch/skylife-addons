@@ -75,3 +75,20 @@ cd ~/workspace/skylife-addons
 git add index.html && git commit -m "수정 내용" && git push
 # → 1~2분 내 배포 URL에 자동 반영
 ```
+
+---
+
+## 2026-06-11
+
+### 작업 내용
+- `<meta name="robots" content="noindex, nofollow">` 추가 (검색엔진 차단)
+- fetch 에러 처리: `loadData()` named function + `!res.ok` 체크 + 다시 시도 버튼
+- 브랜드 표기 통일: footer → `kt skylife`
+- footer 표기 통일: `Created by 박정진 | 모바일 부가서비스 안내`
+- footer 스타일 통일 (FAQ 기준): `position:fixed;bottom:0;padding:10px;color:#666666;z-index:50`
+- `main` padding-bottom 60px → 70px (fixed footer 콘텐츠 겹침 방지)
+
+### 버그 수정 (코드 리뷰)
+- 신규 카테고리 렌더링 누락 수정: `CATS` 외 카테고리도 `groups`에 추가 후 `allCats` 배열로 렌더
+- `conditions.join('<br>')` XSS: `escHtml()` 함수 추가, `conditions.map(escHtml).join('<br>')` 적용
+- `err.message` XSS: HTML 이스케이프 처리
