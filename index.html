@@ -259,10 +259,14 @@ function renderCards(list){
   }
   const groups = {};
   CATS.forEach(c=>{groups[c]=[];});
-  list.forEach(a=>{ if(groups[a.cat]) groups[a.cat].push(a); });
+  list.forEach(a=>{
+    if(!groups[a.cat]) groups[a.cat]=[];
+    groups[a.cat].push(a);
+  });
 
+  const allCats = [...CATS, ...Object.keys(groups).filter(c=>!CATS.includes(c))];
   let html='';
-  CATS.forEach(cat=>{
+  allCats.forEach(cat=>{
     const items = groups[cat];
     if(!items.length) return;
     html += `<div class="section-head"><span class="section-title">${cat}</span><span class="section-count">${items.length}건</span></div>`;
