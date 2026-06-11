@@ -367,12 +367,24 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModalBtn(); }
 /* ═══════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════ */
-fetch('data/addons.json?t=' + Date.now())
-  .then(r => r.json())
-  .then(data => {
+async function loadData() {
+  try {
+    const res = await fetch('data/addons.json?t=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
     ADDONS = data;
     applyFilters();
-  });
+  } catch (err) {
+    document.getElementById('container').innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">⚠️</div>
+        <div class="empty-text">데이터를 불러오지 못했습니다</div>
+        <div style="font-size:12px;color:var(--light);margin-bottom:16px;">${err.message}</div>
+        <button onclick="loadData()" style="background:var(--red);color:#fff;border:none;padding:8px 20px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">다시 시도</button>
+      </div>`;
+  }
+}
+loadData();
 </script>
 </body>
 </html>
