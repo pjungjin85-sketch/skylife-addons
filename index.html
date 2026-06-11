@@ -203,6 +203,7 @@ footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px sol
    DATA
 ═══════════════════════════════════════════ */
 let ADDONS = [];
+function escHtml(s){ return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
 /* ═══════════════════════════════════════════
    STATE
@@ -338,7 +339,7 @@ function openModal(idx){
 
   const infoRows = [];
   if(a.howTo)    infoRows.push(['이용 방법', a.howTo]);
-  if(a.conditions && a.conditions.length) infoRows.push(['가입 조건', a.conditions.join('<br>')]);
+  if(a.conditions && a.conditions.length) infoRows.push(['가입 조건', a.conditions.map(escHtml).join('<br>')]);
   if(infoRows.length){
     body += `<div class="modal-section"><div class="modal-section-title">이용 안내</div><div class="info-grid">`;
     infoRows.forEach(([label,val])=>{
