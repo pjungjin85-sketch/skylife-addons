@@ -92,3 +92,10 @@ git add index.html && git commit -m "수정 내용" && git push
 - 신규 카테고리 렌더링 누락 수정: `CATS` 외 카테고리도 `groups`에 추가 후 `allCats` 배열로 렌더
 - `conditions.join('<br>')` XSS: `escHtml()` 함수 추가, `conditions.map(escHtml).join('<br>')` 적용
 - `err.message` XSS: HTML 이스케이프 처리
+
+---
+
+## 2026-07-16 업데이트 — Supabase 프로젝트 마이그레이션
+- 로그인 게이트(`profiles.status` 조회)가 참조하던 기존 Supabase 프로젝트가 90일 초과 일시정지로 복구 불가 확인 → 신규 프로젝트 `skylife-shared`(ref `qvzlwhwxspmofrwdvgdd`)로 URL/KEY 교체
+- 상세 배경은 skylife-inquiry의 `skylife-inquiry_CONVERSATION_LOG.md` 참고 (워크스페이스 6개 사이트 공용 이슈였음)
+- 이 커밋에는 이미 작업 중이던 로그인월(lock-overlay) 기능도 미커밋 상태로 함께 포함되어 같이 push/배포됨
