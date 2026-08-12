@@ -107,3 +107,35 @@ git add index.html && git commit -m "수정 내용" && git push
 - skylife-guide/TPS에 있던 동일한 `<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,...">` (kt skylife 빨간 로고 SVG)를 6개 파일 `<title>` 다음 줄에 그대로 추가
 - 커밋: `9370d77` — kt skylife 로고 favicon 추가 (skylife-addons)
 - 6개 프로젝트 전체 git push 완료. skylife-inquiry는 Vercel 수동 배포 필요해 `npx vercel deploy --prod` 추가 실행
+
+---
+
+## 2026-07-27 업데이트 — 승인 취소 후에도 로그인 세션이 유지되는 문제 수정
+
+### 문제
+- `sessionStorage`에 `skylife_sso_ok=1` 캐시 플래그를 심어두고, 다음 로드부터는 이 플래그만 보고 바로 잠금을 풀어주던 방식(`init()`)이었음
+- 관리자가 대시보드에서 특정 계정을 `rejected`로 바꿔도, 이미 로그인해서 캐시 플래그가 남아있는 브라우저 탭에서는 여전히 접근 가능한 보안 허점이 있었음
+
+### 수정
+- `SESSION_FLAG` 캐시 플래그 제거
+- SSO 토큰(`#sso=`)이 없는 일반 재방문의 경우, `init()`이 매번 `sb.auth.getSession()`으로 실제 Supabase 세션을 가져온 뒤 `checkApprovedAndUnlock()`으로 `profiles.status`를 서버에서 재확인하도록 변경 — 승인 취소가 즉시 반영됨
+- TPS/skylife-plans/skylife-mobile-faq에도 동일 패턴으로 함께 적용됨(각 프로젝트 로그 참고)
+- 커밋: `8ac403d` — fix: 승인 취소 후에도 로그인 세션이 유지되는 문제 수정
+- `git push` → Vercel 자동배포로 반영
+
+---
+
+## 2026-07-27 업데이트 — 로그인 세션 재검증 방식 수정 (승인 취소 즉시 반영)
+
+### 배경
+- skylife-guide 네트워크 전체를 재점검하는 구조·보안 검토 과정에서, 이 페이지가 최초 로그인 성공 시 `sessionStorage`에 `skylife_sso_ok` 플래그를 남기고 이후로는 그 플래그만 보고 서버 재확인 없이 통과시키는 방식이었다는 걸 확인함
+- 이 방식은 2026-07-20에 "SSO 토큰 경로로 들어온 경우 매번 재확인하면 실패한다"는 다른 버그를 고치려고 도입한 것이었는데, 그 부작용으로 관리자가 admin.html에서 계정을 `rejected`로 바꿔도 이미 로그인해 플래그가 찍힌 탭은 탭을 닫기 전까지 계속 접근 가능한 상태였음
+
+### 수정
+- `SESSION_FLAG`(sessionStorage 캐시) 방식 제거
+- 매 로드마다 `sb.auth.getSession()`으로 기존 세션을 가져온 뒤 `profiles.status === 'approved'`를 다시 확인하도록 변경 (SSO 토큰 경로는 기존과 동일하게 우선 시도, 토큰이 없거나 만료된 경우에만 이 재확인 경로로 진입)
+- Supabase 세션 자체는 이미 `sessionStorage`에 저장돼 있어 재로그인 없이도 동작은 그대로 매끄러움 — DB 조회 한 번 추가되는 정도라 체감 지연 없음
+- 커밋: `8ac403d`
+
+### 배포
+- `git push origin main` → Vercel Git 연동 자동배포로 반영
