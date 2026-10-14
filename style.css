@@ -116,10 +116,16 @@ main{max-width:var(--wrap);margin:0 auto;padding:0 var(--s-5) var(--s-9);}
 
 /* ============================================================
    태그
+   ------------------------------------------------------------
+   이 페이지는 상태 태그(무료/월정액/1회성)가 상자를 유지한다.
+   base.css의 가운뎃점 구분자는 '상자 없는 태그'를 전제로 한 것이라
+   그대로 두면 구분점이 상자 안으로 들어간다. 여기서는 끈다.
    ============================================================ */
+.tag + .tag::before{content:none;}
+.card-tags,.modal-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 .tag{
   display:inline-block;font-size:11px;font-weight:600;
-  padding:2px 9px;border-radius:var(--r-pill);white-space:nowrap;
+  padding:2px 9px;border-radius:var(--r-tag);white-space:nowrap;
 }
 .tag-cat{background:none;color:var(--light);border:none;padding:2px 0;}
 .tag-free{background:var(--ok-light);color:var(--ok);border:1px solid var(--ok-border);}
