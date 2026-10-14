@@ -10,134 +10,22 @@
 <meta http-equiv="Expires" content="0">
 <title>kt skylife 모바일 부가서비스 안내</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0id2hpdGUiLz48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjciIGZpbGw9IiNFNjAwMTIiLz48dGV4dCB4PSI1MCIgeT0iNTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCBCbGFjayxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjMwIiBmaWxsPSIjMUExQTFBIj5rdDwvdGV4dD48dGV4dCB4PSI1MCIgeT0iODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCBCbGFjayxBcmlhbCxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjIwIiBmaWxsPSIjRTYwMDEyIj5za3lsaWZlPC90ZXh0Pjwvc3ZnPg==">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" integrity="sha384-2nNKoOPayicGa+aRguOQuiZP+RqQ4G3jalfDeOgftkKD7zBM2gJXTwcFqCZltdv0" crossorigin="anonymous">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
-<style>
-:root{--red:#E60012;--red2:#CC0010;--red-light:#FFF5F5;--red-border:#FFCCCC;--black:#1A1A1A;--dark:#333333;--mid:#666666;--light:#999999;--bg:#FFFFFF;--bg2:#F7F7F7;--bg3:#FAFAFA;--border:#E8E8E8;--shadow:0 2px 12px rgba(0,0,0,0.08);--shadow-hover:0 8px 28px rgba(0,0,0,0.14);}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg2);color:var(--dark);font-family:'Noto Sans KR',sans-serif;min-height:100vh;}
-
-/* HEADER */
-header{background:var(--bg);border-top:3px solid var(--red);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:200;box-shadow:var(--shadow);}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;height:56px;gap:12px;}
-.logo-text{font-size:18px;font-weight:900;color:var(--black);letter-spacing:-.02em;white-space:nowrap;}
-.logo-text span{color:var(--red);}
-.header-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.04em;white-space:nowrap;}
-.header-title{font-size:15px;font-weight:700;color:var(--dark);}
-.header-count{font-size:12px;color:var(--light);margin-left:auto;white-space:nowrap;}
-.guide-home-btn{padding:6px 14px;border:none;border-radius:6px;font-size:12px;font-weight:700;color:#fff;background:#22C55E;text-decoration:none;white-space:nowrap;font-family:inherit;flex-shrink:0;}
-.guide-home-btn:hover{background:#16A34A;}
-
-/* CONTROLS */
-.controls-wrap{max-width:1200px;margin:0 auto;padding:20px 20px 0;}
-.controls-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px;}
-.search-wrap{position:relative;flex:1;min-width:220px;max-width:360px;}
-.search-wrap input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px 12px 9px 36px;color:var(--dark);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s;}
-.search-wrap input:focus{border-color:var(--red);}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--light);font-size:14px;}
-.reset-btn{padding:7px 14px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid var(--red-border);background:var(--red-light);color:var(--red);font-family:inherit;transition:all .2s;white-space:nowrap;}
-.reset-btn:hover{background:rgba(230,0,18,.15);}
-.row-label{font-size:11px;font-weight:700;color:var(--mid);letter-spacing:.04em;white-space:nowrap;}
-.filter-btn{padding:7px 14px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--mid);transition:all .2s;font-family:inherit;white-space:nowrap;}
-.filter-btn:hover{border-color:var(--red-border);color:var(--dark);}
-.filter-btn.active{background:var(--red);color:#fff;border-color:transparent;}
-
-/* STATS */
-.stats-bar{max-width:1200px;margin:12px auto 0;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap;}
-.stat-chip{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:12px;color:var(--mid);box-shadow:var(--shadow);}
-.stat-chip .num{font-weight:700;color:var(--red);}
-
-/* GRID */
-main{max-width:1200px;margin:20px auto;padding:0 20px 70px;}
-.section-head{display:flex;align-items:center;gap:10px;margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border);}
-.section-title{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--red);}
-.section-count{font-size:11px;color:var(--mid);background:var(--bg2);padding:2px 8px;border-radius:10px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
-
-/* CARD */
-.card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px;cursor:pointer;}
-.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--red-border);}
-.card.free::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#10b981,#34d399);}
-.card.paid::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red2),var(--red));}
-.card.once::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#d97706,#fbbf24);}
-
-.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
-.card-name{font-size:14px;font-weight:700;color:var(--black);line-height:1.4;}
-.price-badge{font-size:13px;font-weight:700;white-space:nowrap;text-align:right;flex-shrink:0;line-height:1.4;}
-.price-badge.free-price{color:#059669;}
-.price-badge.paid-price{color:var(--red);}
-.price-badge.once-price{color:#d97706;}
-
-.card-tags{display:flex;gap:5px;flex-wrap:wrap;}
-.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
-.tag-cat{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
-.tag-free{background:rgba(16,185,129,.1);color:#059669;border:1px solid rgba(16,185,129,.2);}
-.tag-paid{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
-.tag-once{background:rgba(217,119,6,.1);color:#d97706;border:1px solid rgba(217,119,6,.2);}
-.tag-auto{background:rgba(99,102,241,.1);color:#6366f1;border:1px solid rgba(99,102,241,.2);}
-.tag-trial{background:rgba(16,185,129,.12);color:#059669;border:1px solid rgba(16,185,129,.25);}
-
-.card-desc{font-size:12px;color:var(--mid);line-height:1.6;}
-.card-note{font-size:11px;color:var(--light);line-height:1.5;}
-.detail-hint{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;color:var(--light);font-weight:500;}
-
-/* EMPTY */
-.empty{text-align:center;padding:80px 20px;color:var(--mid);}
-.empty-icon{font-size:48px;margin-bottom:14px;}
-.empty-text{font-size:15px;font-weight:600;margin-bottom:6px;}
-
-/* ─── MODAL ─── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s;}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--bg);border-radius:14px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);transform:translateY(20px);transition:transform .25s;position:relative;}
-.modal-overlay.open .modal{transform:translateY(0);}
-
-.modal-top{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--border);padding:18px 20px 14px;z-index:2;border-radius:14px 14px 0 0;}
-.modal-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-.modal-title{font-size:17px;font-weight:700;color:var(--black);line-height:1.35;}
-.modal-price{font-size:16px;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.modal-price.free-price{color:#059669;}
-.modal-price.paid-price{color:var(--red);}
-.modal-price.once-price{color:#d97706;}
-.modal-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-
-.modal-body{padding:20px;}
-.modal-section{margin-bottom:20px;}
-.modal-section:last-child{margin-bottom:0;}
-.modal-section-title{font-size:11px;font-weight:700;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.modal-section-title::after{content:'';flex:1;height:1px;background:var(--red-border);}
-
-.feature-list{display:flex;flex-direction:column;gap:6px;}
-.feature-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--dark);line-height:1.55;}
-.feature-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:6px;}
-
-.info-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:12px;}
-.info-label{color:var(--mid);font-weight:600;white-space:nowrap;}
-.info-val{color:var(--dark);line-height:1.55;}
-
-.warn-box{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.2);border-radius:6px;padding:10px 12px;font-size:12px;color:#92400e;line-height:1.6;}
-.trial-box{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:6px;padding:10px 12px;font-size:12px;color:#065f46;line-height:1.6;}
-
-/* FOOTER */
-footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);text-align:center;padding:10px;font-size:11px;color:#666666;z-index:50;}
-
-/* MOBILE */
-@media(max-width:767px){
-  .logo-text{font-size:15px;flex-shrink:0;}
-  .header-badge{font-size:9px;padding:2px 7px;}
-  .header-title{font-size:13px;}
-  .guide-home-btn{padding:5px 8px;font-size:11px;}
-  .controls-row{flex-wrap:wrap;}
-  .search-wrap{max-width:100%;}
-  .grid{grid-template-columns:1fr;}
-  .stats-bar{gap:6px;}
-  .stat-chip{font-size:11px;padding:5px 10px;}
-  .modal{max-height:95vh;border-radius:14px 14px 0 0;margin-top:auto;}
-  .modal-overlay{align-items:flex-end;padding:0;}
-}
-</style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><path d="m16.5 16.5 4 4"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 1 2.6 6.1"/><path d="M3.5 19v-5h5"/></symbol>
+<symbol id="i-detail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4M12 17h.01"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+</defs></svg>
+
 <div id="lock-overlay">
   <div class="lock-box">
     <div class="lock-logo">kt <span>skylife</span></div>
@@ -154,29 +42,6 @@ footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px sol
     </div>
   </div>
 </div>
-<style>
-#lock-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg2);display:flex;align-items:center;justify-content:center;padding:20px;}
-#lock-overlay.hidden{display:none;}
-.lock-box{background:var(--bg);border:1px solid var(--border);border-top:3px solid var(--red);border-radius:16px;padding:40px 36px 32px;width:100%;max-width:380px;box-shadow:var(--shadow);text-align:center;}
-.lock-logo{font-size:20px;font-weight:900;color:var(--black);margin-bottom:4px;}
-.lock-logo span{color:var(--red);}
-.lock-sub{font-size:12px;color:var(--light);margin-bottom:24px;line-height:1.5;}
-.lock-loading{display:flex;justify-content:center;padding:24px 0;}
-.spinner{width:26px;height:26px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:lock-spin .7s linear infinite;}
-@keyframes lock-spin{to{transform:rotate(360deg);}}
-.login-area{display:none;}
-.login-area.show{display:block;}
-#login-form{display:flex;flex-direction:column;gap:10px;text-align:left;}
-.auth-field label{font-size:11px;font-weight:700;color:var(--dark);margin-bottom:4px;display:block;}
-.auth-field input{width:100%;padding:11px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;color:var(--black);transition:border-color .15s;}
-.auth-field input:focus{border-color:var(--red);}
-.auth-submit-btn{width:100%;padding:13px;background:var(--red);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer;margin-top:4px;transition:background .15s;}
-.auth-submit-btn:hover{background:var(--red2);}
-.auth-submit-btn:disabled{background:var(--light);cursor:not-allowed;}
-.auth-msg{font-size:12px;margin-top:6px;min-height:16px;text-align:center;}
-.auth-msg.error{color:var(--red);}
-.lock-hint{font-size:11px;color:var(--light);margin-top:18px;line-height:1.5;}
-</style>
 <script>
 (function(){
   var SUPABASE_URL = 'https://qvzlwhwxspmofrwdvgdd.supabase.co';
@@ -255,20 +120,20 @@ footer{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px sol
 <header>
   <div class="header-inner">
     <div class="logo-text">kt <span>skylife</span></div>
-    <span class="header-badge">MOBILE</span>
+    <span class="header-badge">대리점 전용</span>
     <span class="header-title">모바일 부가서비스 안내</span>
     <span class="header-count" id="headerCount"></span>
-    <a href="https://skylife-guide-jyac.vercel.app/" class="guide-home-btn">돌아가기</a>
+    <a href="https://skylife-guide-jyac.vercel.app/" class="guide-home-btn"><svg><use href="#i-back"></use></svg>가이드로</a>
   </div>
 </header>
 
 <div class="controls-wrap">
   <div class="controls-row">
     <div class="search-wrap">
-      <span class="search-icon">🔍</span>
+      <svg><use href="#i-search"></use></svg>
       <input type="text" id="searchInput" placeholder="서비스명, 설명 검색…" oninput="applyFilters()">
     </div>
-    <button class="reset-btn" onclick="resetFilters()">초기화</button>
+    <button class="reset-btn" onclick="resetFilters()"><svg><use href="#i-reset"></use></svg>초기화</button>
   </div>
   <div class="controls-row">
     <span class="row-label">카테고리</span>
@@ -373,7 +238,7 @@ const CATS = ['통화편의','차단/보안','데이터','로밍','OTT/음악','
 function renderCards(list){
   const container = document.getElementById('container');
   if(!list.length){
-    container.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">검색 결과가 없습니다</div></div>`;
+    container.innerHTML=`<div class="empty"><div class="empty-icon"><svg><use href="#i-search"></use></svg></div><div class="empty-text">검색 결과가 없습니다</div></div>`;
     document.getElementById('headerCount').textContent='';
     return;
   }
@@ -410,7 +275,7 @@ function renderCards(list){
           ${a.trial?'<span class="tag tag-trial">무료체험</span>':''}
         </div>
         <div class="card-desc">${a.desc}</div>
-        ${hasDetail?'<div class="detail-hint"><span>📋</span> 상세 정보 보기</div>':''}
+        ${hasDetail?'<div class="detail-hint">상세 정보 보기<svg><use href="#i-detail"></use></svg></div>':''}
       </div>`;
     });
     html += '</div>';
@@ -468,10 +333,10 @@ function openModal(idx){
   }
 
   if(a.trial){
-    body += `<div class="modal-section"><div class="trial-box">🎁 ${a.trial}</div></div>`;
+    body += `<div class="modal-section"><div class="trial-box">${a.trial}</div></div>`;
   }
   if(a.warn){
-    body += `<div class="modal-section"><div class="warn-box">⚠️ ${a.warn}</div></div>`;
+    body += `<div class="modal-section"><div class="warn-box">${a.warn}</div></div>`;
   }
   if(a.note){
     body += `<div class="modal-section"><div class="warn-box" style="background:rgba(99,102,241,.06);border-color:rgba(99,102,241,.2);color:#3730a3;">ℹ️ ${a.note}</div></div>`;
@@ -501,7 +366,7 @@ async function loadData() {
   } catch (err) {
     document.getElementById('container').innerHTML = `
       <div class="empty">
-        <div class="empty-icon">⚠️</div>
+        <div class="empty-icon"><svg><use href="#i-warn"></use></svg></div>
         <div class="empty-text">데이터를 불러오지 못했습니다</div>
         <div style="font-size:12px;color:var(--light);margin-bottom:16px;">${err.message.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}</div>
         <button onclick="loadData()" style="background:var(--red);color:#fff;border:none;padding:8px 20px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">다시 시도</button>
