@@ -51,7 +51,7 @@ body{background:var(--bg2);}
 .search-wrap input::placeholder{color:var(--light);}
 
 .reset-btn{
-  padding:8px 14px;border:1px solid var(--border);border-radius:var(--r-pill);
+  padding:8px 14px;border:1px solid var(--border);border-radius:var(--r-md);
   font-size:var(--t-xs);font-weight:600;color:var(--mid);background:var(--bg);
   cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;
   transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
@@ -64,10 +64,11 @@ body{background:var(--bg2);}
   max-width:var(--wrap);margin:0 auto;padding:0 var(--s-5) var(--s-4);
   display:flex;gap:var(--s-2);flex-wrap:wrap;
 }
+/* 개수 안내라 상자가 필요 없다 */
+.stats-bar{gap:var(--s-5);}
 .stat-chip{
   display:flex;align-items:center;gap:6px;
-  background:var(--bg);border:1px solid var(--border);border-radius:var(--r-pill);
-  padding:6px 13px;font-size:var(--t-xs);color:var(--mid);
+  font-size:var(--t-xs);color:var(--mid);
 }
 .stat-chip .num{font-weight:700;color:var(--black);font-variant-numeric:tabular-nums;}
 
@@ -120,7 +121,7 @@ main{max-width:var(--wrap);margin:0 auto;padding:0 var(--s-5) var(--s-9);}
   display:inline-block;font-size:11px;font-weight:600;
   padding:2px 9px;border-radius:var(--r-pill);white-space:nowrap;
 }
-.tag-cat{background:var(--bg2);color:var(--mid);border:1px solid var(--border);}
+.tag-cat{background:none;color:var(--light);border:none;padding:2px 0;}
 .tag-free{background:var(--ok-light);color:var(--ok);border:1px solid var(--ok-border);}
 .tag-paid{background:var(--red-light);color:var(--red);border:1px solid var(--red-border);}
 .tag-once{background:var(--warn-light);color:var(--warn);border:1px solid var(--warn-border);}
