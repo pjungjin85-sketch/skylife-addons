@@ -21,7 +21,7 @@ body{background:var(--bg2);}
 .guide-home-btn svg{width:14px;height:14px;color:var(--light);}
 .guide-home-btn:hover{border-color:var(--light);background:var(--bg2);}
 .guide-home-btn:hover svg{color:var(--black);}
-.header-count{margin-left:auto;}
+.header-title .header-count{font-weight:500;margin-left:2px;}
 
 /* ============================================================
    검색 · 필터
