@@ -245,7 +245,7 @@ function renderCards(list){
   const container = document.getElementById('container');
   if(!list.length){
     container.innerHTML=`<div class="empty"><div class="empty-icon"><svg><use href="#i-search"></use></svg></div><div class="empty-text">검색 결과가 없습니다</div></div>`;
-    document.getElementById('headerCount').textContent='(0건)';
+    document.getElementById('headerCount').textContent='(0개)';
     return;
   }
   const groups = {};
@@ -287,7 +287,7 @@ function renderCards(list){
     html += '</div>';
   });
   container.innerHTML = html;
-  document.getElementById('headerCount').textContent = `(${list.length}건)`;
+  document.getElementById('headerCount').textContent = `(${list.length}개)`;
 }
 
 function updateStats(list){
