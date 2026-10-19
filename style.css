@@ -215,3 +215,12 @@ main{max-width:var(--wrap);margin:0 auto;padding:0 var(--s-5) var(--s-9);}
   .modal-top{padding:var(--s-4);}
   .modal-body{padding:var(--s-4);}
 }
+
+/* 기준월 표시 (data/*.json 의 월별 키에서 자동 반영) */
+.base-month{
+  margin-bottom:var(--s-3);
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:var(--t-xs);font-weight:600;color:var(--mid);
+}
+.base-month::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--red);}
+.base-month:empty{display:none;}
