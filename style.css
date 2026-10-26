@@ -175,7 +175,7 @@ main{max-width:var(--wrap);margin:0 auto;padding:0 var(--s-5) var(--s-9);}
 
 .info-grid{display:grid;grid-template-columns:auto 1fr;gap:8px var(--s-4);font-size:var(--t-sm);}
 .info-label{color:var(--mid);font-weight:600;white-space:nowrap;}
-.info-val{color:var(--dark);line-height:1.6;}
+.info-val{color:var(--dark);line-height:1.6;min-width:0;overflow-wrap:anywhere;}  /* 제휴 서비스 해지 URL 같은 긴 글자 줄바꿈 */
 
 .warn-box{
   background:var(--warn-light);border:1px solid var(--warn-border);

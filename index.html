@@ -153,6 +153,7 @@
     <button class="filter-btn" data-cat="알림" onclick="setCat(this)">알림</button>
     <button class="filter-btn" data-cat="번호" onclick="setCat(this)">번호</button>
     <button class="filter-btn" data-cat="안전/위치" onclick="setCat(this)">안전·위치</button>
+    <button class="filter-btn" data-cat="제휴 서비스" onclick="setCat(this)">제휴 서비스</button>
   </div>
   <div class="controls-row">
     <span class="row-label">요금 유형</span>
@@ -240,7 +241,7 @@ function applyFilters(){
 /* ═══════════════════════════════════════════
    RENDER
 ═══════════════════════════════════════════ */
-const CATS = ['통화편의','차단/보안','데이터','로밍','OTT/음악','알림','번호','안전/위치'];
+const CATS = ['통화편의','차단/보안','데이터','로밍','OTT/음악','알림','번호','안전/위치','제휴 서비스'];
 
 function renderCards(list){
   const container = document.getElementById('container');
